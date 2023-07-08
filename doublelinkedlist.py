@@ -75,7 +75,64 @@ class doubleLinkedList:
 
         node.next = Node(data, node, None)
 
-    #Turns the double linked list into a lis
+    #Deletes the first Element in the double linked list
+    def delete_first(self):
+
+        #If the list is empty
+        if self.head == None:
+            raise Exception("The list is Empty")
+
+        #If list has only head
+        if self.length() == 1:
+            self.head = None
+            return
+
+        self.head = self.head.next
+        self.head.prev = None
+
+    #Deletes the specified node
+    def delete(self, node_data):
+
+        #If the list is empty
+        if self.head == None:
+            raise Exception("The list is Empty")
+
+        node = self.head
+        while node:
+            #If the current node is the node to be deleted
+            if node.data == node_data:
+                break
+
+            node = node.next
+        
+        #If this is the last Node
+        if node.next == None:
+            node.prev.next = None
+            return
+
+        node.prev.next = node.next
+        node.next.prev = node.prev
+
+    #Deletes the last node
+    def delete_last(self):
+
+        #If the list is empty
+        if self.head == None:
+            raise Exception("The list is Empty")
+
+        #If list has only head
+        if self.length() == 1:
+            self.head = None
+            return
+
+        node = self.head
+
+        while node.next:
+            node = node.next
+
+        node.prev.next = None
+
+    #Turns the double linked list into a list
     def to_list(self):
         node = self.head
         ls = []
@@ -86,6 +143,13 @@ class doubleLinkedList:
 
         return ls
 
+    #Creates a double linked list from python list
+    def from_list(self, python_list):
+
+        for element in python_list:
+            self.insert_at_end(element)
+
+    #prints the elements
     def print_forward(self):
         
         arr = self.to_list()
@@ -109,12 +173,6 @@ class doubleLinkedList:
 
 
 ls = doubleLinkedList()
-ls.insert_at_beginning(20)
-ls.insert_at_beginning(15)
-ls.insert_at_beginning(10)
-ls.insert_at_beginning(5)
-ls.insert_at_end(25)
-ls.insert_at(2,12)
+ls.from_list([("Test", 1), ("Test", 1), ("Test2", 21), ("Test3", 31)])
 ls.print_forward()
 print(ls.length())
-
