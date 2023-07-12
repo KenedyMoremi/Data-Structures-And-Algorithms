@@ -170,9 +170,3 @@ class doubleLinkedList:
             ls += str(i) + "-->"
 
         print(ls)
-
-
-ls = doubleLinkedList()
-ls.from_list([("Test", 1), ("Test", 1), ("Test2", 21), ("Test3", 31)])
-ls.print_forward()
-print(ls.length())
